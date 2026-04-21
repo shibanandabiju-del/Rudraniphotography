@@ -4,120 +4,539 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Book - Rudrani Photography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
         }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 15px;
+            color: var(--text-dark);
+        }
+
         .container {
             max-width: 1100px;
             margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease-in-out;
         }
-        .header {
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- LOGIN SCREEN --- */
+        #loginScreen {
+            max-width: 400px;
+            margin: 80px auto;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             text-align: center;
-            border-bottom: 3px solid #1a73e8;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
         }
-        .header h1 {
-            color: #1a73e8;
-            margin: 0 0 10px 0;
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        #loginScreen h1 {
+            color: var(--primary);
+            font-size: 26px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
-        .header-info {
+        #loginScreen p { color: var(--text-muted); margin-bottom: 25px; font-size: 14px; }
+
+        /* --- CARD STYLE --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- TOP NAVBAR --- */
+        .top-nav {
             display: flex;
             justify-content: space-between;
-            font-size: 18px;
-            font-weight: bold;
-            color: #444;
-        }
-        .form-row, .action-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 20px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            align-items: flex-end;
         }
-        .form-group {
-            flex: 1;
-            min-width: 150px;
+        .nav-brand h2 { margin: 0; color: var(--primary); font-size: 22px; }
+        .nav-brand span { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .btn-logout {
+            display: flex; align-items: center; gap: 8px; background-color: #fee2e2; color: var(--danger);
+            border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s;
         }
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #333;
+        .btn-logout:hover { background-color: var(--danger); color: white; }
+
+        /* --- PROFILE SECTION --- */
+        .profile-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
+        .profile-pic {
+            width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: #f8fafc;
         }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
+        .upload-text {
+            color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 10px;
+            background: #eff6ff; padding: 5px 12px; border-radius: 20px; transition: 0.2s;
         }
-        .payment-input {
-            background-color: #fff9e6;
-            border: 2px solid #ff9800;
-            font-weight: bold;
-            font-size: 16px;
+        .upload-text:hover { background: #dbeafe; }
+
+        /* --- FORM GRID --- */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: end; }
+        label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+        input, select {
+            width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px;
+            font-size: 14px; font-family: inherit; transition: all 0.2s; background-color: #f9fafb; box-sizing: border-box;
         }
-        button {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 15px;
-            transition: background 0.3s;
+        input:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); background-color: white; }
+
+        /* --- BUTTONS --- */
+        .btn { width: 100%; padding: 11px; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+        .btn-success { background-color: var(--success); color: white; }
+        .btn-success:hover { background-color: #059669; }
+        .btn-purple { background-color: var(--purple); color: white; }
+        .btn-purple:hover { background-color: #7c3aed; }
+        .btn-whatsapp { background-color: #25D366; color: white; display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .btn-whatsapp:hover { background-color: #1da851; }
+
+        /* --- TABLE --- */
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; font-size: 14px; }
+        th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 12px; text-align: left; border-bottom: 2px solid var(--border-color); }
+        td { padding: 12px; border-bottom: 1px solid var(--border-color); color: var(--text-dark); }
+        tr:hover { background-color: #f8fafc; }
+        .status-present { color: var(--success); font-weight: 600; background: #d1fae5; padding: 4px 8px; border-radius: 6px; font-size: 12px;}
+        .status-off { color: var(--danger); font-weight: 600; background: #fee2e2; padding: 4px 8px; border-radius: 6px; font-size: 12px;}
+        .edit-btn { background-color: #eff6ff; color: var(--primary); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;}
+        .edit-btn:hover { background-color: #dbeafe; }
+
+        /* --- SUMMARY --- */
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        .summary-box { background: white; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center; }
+        .summary-title { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 5px; text-transform: uppercase; }
+        .summary-val { font-size: 22px; font-weight: 700; color: var(--text-dark); }
+        .val-green { color: var(--success); }
+        .val-orange { color: var(--warning); }
+        .val-red { color: var(--danger); }
+        .box-pending { background: #fef2f2; border-color: #fca5a5; }
+
+        /* --- SALARY INPUT --- */
+        .salary-section { display: flex; justify-content: center; margin: 15px 0;}
+        .salary-input { max-width: 250px; text-align: center; font-size: 18px; font-weight: bold; color: var(--warning); border-color: #fcd34d; background: #fffbeb;}
+        .salary-input:focus { border-color: var(--warning); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15); }
+        
+        .sync-icon { vertical-align: middle; margin-right: 5px; }
+
+    </style>
+</head>
+<body>
+
+<div class="container" id="loginScreen">
+    <h1>Rudrani Studio</h1>
+    <p>Editor Workspace Portal</p>
+    
+    <div style="margin-bottom: 20px;">
+        <input type="text" id="authInput" placeholder="Enter Gmail or Mobile Number" style="text-align: center;">
+    </div>
+    
+    <button class="btn btn-primary" onclick="login()">Log In</button>
+    <p style="margin: 15px 0; font-size: 12px; font-weight: bold;">OR</p>
+    <button class="btn btn-success" onclick="createAccount()" style="background: #e5e7eb; color: #374151;">Create Account</button>
+</div>
+
+<div class="container" id="mainApp" style="display: none;">
+    
+    <div class="card" style="padding-bottom: 10px;">
+        <div class="top-nav">
+            <div class="nav-brand">
+                <h2>Rudrani Photography</h2>
+                <span>Editor: Biju</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Logout
+            </button>
+        </div>
+
+        <div class="profile-section">
+            <img id="profileImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YxZjVmOSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkeT0iLjM1ZW0iIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTJweCIgZmlsbD0iIzY0NzQ4YiI+Tm8gRFA8L3RleHQ+PC9zdmc+" alt="Profile Logo" class="profile-pic">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="uploadDP(event)">
+            <div class="upload-text" onclick="document.getElementById('imageUpload').click()">📷 Change Picture</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="form-grid">
+            <div>
+                <label>Date</label>
+                <input type="date" id="workDate" required>
+            </div>
+            <div>
+                <label>Attendance</label>
+                <select id="attendance" onchange="toggleFields()">
+                    <option value="Present">Present</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <div>
+                <label>Client Name</label>
+                <input type="text" id="clientName" placeholder="Enter Client Name">
+            </div>
+            <div>
+                <label>Project Type</label>
+                <select id="projectType">
+                    <option value="-">Select Project</option>
+                    <option value="Wedding Video">Wedding Video</option>
+                    <option value="Pre-Wedding">Pre-Wedding</option>
+                    <option value="Music Video">Music Video</option>
+                    <option value="Reels/Shorts">Reels/Shorts</option>
+                    <option value="Invitation">Invitation</option>
+                    <option value="Demo">Demo</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Thread">Thread</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <label>Price (₹)</label>
+                <input type="number" id="projectPrice" placeholder="0" min="0">
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="addEntry()">+ Add Record</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Client Name</th>
+                        <th>Project Type</th>
+                        <th>Price (₹)</th>
+                        <th>Lunch (₹)</th>
+                        <th>Total (₹)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="salary-section">
+            <div>
+                <label style="text-align: center; color: var(--warning);">Salary Received from Owner (₹)</label>
+                <input type="number" id="salaryPaid" class="salary-input" placeholder="0" onkeyup="updateCalculations()" onchange="updateCalculations()">
+            </div>
+        </div>
+        <div class="summary-grid">
+            <div class="summary-box"><div class="summary-title">Present Days</div><div class="summary-val" id="totPresent">0</div></div>
+            <div class="summary-box"><div class="summary-title">Off Days</div><div class="summary-val val-red" id="totOff">0</div></div>
+            <div class="summary-box"><div class="summary-title">Total Earned</div><div class="summary-val val-green">₹<span id="grandTotal">0</span></div></div>
+            <div class="summary-box"><div class="summary-title">Salary Paid</div><div class="summary-val val-orange">₹<span id="displayPaid">0</span></div></div>
+            <div class="summary-box box-pending"><div class="summary-title">Pending Balance</div><div class="summary-val val-red">₹<span id="totPending">0</span></div></div>
+        </div>
+    </div>
+
+    <div class="card" style="border: 1px solid var(--purple); background-color: #faf5ff;">
+        <h3 style="margin-top: 0; color: var(--purple); font-size: 16px; margin-bottom: 5px;">🔄 Advanced Cross-Device Sync</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px; margin-top: 0;">Doosre phone/PC par same data dekhne ke liye yahan se backup file download karke wahan upload karein.</p>
+        <div class="form-grid">
+            <div>
+                <button class="btn btn-primary" onclick="exportDataBackup()">☁️ Download Sync File</button>
+            </div>
+            <div>
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importDataBackup(event)">
+                <button class="btn btn-purple" onclick="document.getElementById('importFile').click()">📂 Restore Sync File</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="form-grid">
+            <div>
+                <button class="btn btn-success" onclick="downloadExcel()">📥 Download Excel</button>
+            </div>
+            <div>
+                <input type="text" id="waNumber" placeholder="WhatsApp No (e.g. 919876543210)">
+            </div>
+            <div>
+                <button class="btn btn-whatsapp" onclick="shareWhatsApp()">
+                    <svg class="sync-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Share Report
+                </button>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+            <button class="btn" style="background: white; color: var(--danger); border: 1px solid var(--danger); max-width: 250px;" onclick="clearAllData()">🗑️ Clear Data (New Month)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- AUTHENTICATION SYSTEM ---
+    let registeredUsers = JSON.parse(localStorage.getItem('rudraniUsers')) || [];
+    let loggedInUser = localStorage.getItem('loggedInSession');
+
+    if (loggedInUser) { showApp(); }
+
+    function createAccount() {
+        let authId = document.getElementById('authInput').value.trim();
+        if (authId === "") { alert("Please enter Gmail or Mobile Number to Create Account!"); return; }
+        if (registeredUsers.includes(authId)) { alert("Account exists! Click Log In."); return; }
+        registeredUsers.push(authId);
+        localStorage.setItem('rudraniUsers', JSON.stringify(registeredUsers));
+        alert("Account Created Successfully! You can now log in.");
+    }
+
+    function login() {
+        let authId = document.getElementById('authInput').value.trim();
+        if (authId === "") { alert("Please enter your registered Gmail or Mobile Number."); return; }
+        if (registeredUsers.includes(authId)) {
+            localStorage.setItem('loggedInSession', authId);
+            showApp();
+        } else {
+            alert("Account not found! Create an account first.");
         }
-        button:hover {
-            background-color: #1557b0;
+    }
+
+    function logout() {
+        localStorage.removeItem('loggedInSession');
+        document.getElementById('authInput').value = "";
+        document.getElementById('loginScreen').style.display = "block";
+        document.getElementById('mainApp').style.display = "none";
+    }
+
+    function showApp() {
+        document.getElementById('loginScreen').style.display = "none";
+        document.getElementById('mainApp').style.display = "block";
+        loadAppData(); 
+    }
+
+    // --- MAIN APP LOGIC ---
+    let workData = [];
+
+    function loadAppData() {
+        workData = JSON.parse(localStorage.getItem('rudraniData')) || [];
+        document.getElementById('salaryPaid').value = localStorage.getItem('rudraniSalary') || "";
+        document.getElementById('workDate').valueAsDate = new Date();
+        let savedLogo = localStorage.getItem('rudraniLogo');
+        if (savedLogo) { document.getElementById('profileImage').src = savedLogo; }
+        updateUI();
+    }
+
+    function uploadDP(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result;
+                localStorage.setItem('rudraniLogo', e.target.result);
+            };
+            reader.readAsDataURL(file);
         }
-        .btn-excel {
-            background-color: #107c41;
+    }
+
+    function toggleFields() {
+        const off = document.getElementById('attendance').value === "Off";
+        const cName = document.getElementById('clientName');
+        const pType = document.getElementById('projectType');
+        const pPrice = document.getElementById('projectPrice');
+
+        if (off) {
+            cName.value = "-"; cName.disabled = true;
+            pType.value = "-"; pType.disabled = true;
+            pPrice.value = 0; pPrice.disabled = true;
+        } else {
+            cName.value = ""; cName.disabled = false;
+            pType.disabled = false; pPrice.value = ""; pPrice.disabled = false;
         }
-        .btn-excel:hover {
-            background-color: #0c5e31;
+    }
+
+    function addEntry() {
+        const date = document.getElementById('workDate').value;
+        const attendance = document.getElementById('attendance').value;
+        let client = document.getElementById('clientName').value || "-";
+        let type = document.getElementById('projectType').value;
+        let price = parseFloat(document.getElementById('projectPrice').value) || 0;
+        
+        if (!date) return; 
+
+        let lunch = attendance === "Present" ? 50 : 0;
+        if (attendance === "Off") { client = "-"; type = "-"; price = 0; }
+
+        workData.push({ date, attendance, client, type, price, lunch, total: price + lunch });
+        localStorage.setItem('rudraniData', JSON.stringify(workData));
+
+        document.getElementById('clientName').value = "";
+        document.getElementById('projectPrice').value = "";
+        document.getElementById('attendance').value = "Present";
+        toggleFields();
+        updateUI();
+    }
+
+    function editPrice(index) {
+        let currentPrice = workData[index].price;
+        let newPrice = prompt("Update Project Price for " + workData[index].client + ":", currentPrice);
+        if (newPrice !== null && newPrice !== "") {
+            workData[index].price = parseFloat(newPrice) || 0;
+            workData[index].total = workData[index].price + workData[index].lunch;
+            localStorage.setItem('rudraniData', JSON.stringify(workData));
+            updateUI(); 
         }
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: white;
+    }
+
+    function updateUI() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = "";
+        let pCount = 0, oCount = 0, tProject = 0, tLunch = 0;
+
+        workData.forEach((row, idx) => {
+            if (row.attendance === "Present") pCount++;
+            if (row.attendance === "Off") oCount++;
+            tProject += row.price; tLunch += row.lunch;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.date}</td>
+                <td><span class="${row.attendance === "Present" ? "status-present" : "status-off"}">${row.attendance}</span></td>
+                <td style="font-weight: 500;">${row.client}</td>
+                <td>${row.type}</td>
+                <td>₹${row.price}</td>
+                <td>₹${row.lunch}</td>
+                <td style="font-weight: 700; color: var(--primary);">₹${row.total}</td>
+                <td>${row.attendance === "Present" ? `<button class="edit-btn" onclick="editPrice(${idx})">Edit</button>` : "-"}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('totPresent').innerText = pCount;
+        document.getElementById('totOff').innerText = oCount;
+        document.getElementById('grandTotal').innerText = tProject + tLunch;
+        updateCalculations();
+    }
+
+    function updateCalculations() {
+        let grandTotal = parseFloat(document.getElementById('grandTotal').innerText) || 0;
+        let paidAmount = parseFloat(document.getElementById('salaryPaid').value) || 0;
+        document.getElementById('displayPaid').innerText = paidAmount;
+        document.getElementById('totPending').innerText = grandTotal - paidAmount;
+        localStorage.setItem('rudraniSalary', document.getElementById('salaryPaid').value);
+    }
+
+    // --- NEW: CLOUD SYNC LOGIC ---
+    function exportDataBackup() {
+        const fullData = {
+            workData: JSON.parse(localStorage.getItem('rudraniData')) || [],
+            salary: localStorage.getItem('rudraniSalary') || "",
+            logo: localStorage.getItem('rudraniLogo') || "",
+            users: JSON.parse(localStorage.getItem('rudraniUsers')) || []
+        };
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullData));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "Rudrani_Sync_" + new Date().toISOString().split('T')[0] + ".json");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
+
+    function importDataBackup(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+                if(importedData.workData) localStorage.setItem('rudraniData', JSON.stringify(importedData.workData));
+                if(importedData.salary !== undefined) localStorage.setItem('rudraniSalary', importedData.salary);
+                if(importedData.logo) localStorage.setItem('rudraniLogo', importedData.logo);
+                if(importedData.users) localStorage.setItem('rudraniUsers', JSON.stringify(importedData.users));
+                
+                alert("Data Restored Successfully! Your device is now Synced.");
+                loadAppData();
+                
+                // Clear the input so you can upload the same file again if needed
+                document.getElementById('importFile').value = "";
+            } catch (error) {
+                alert("Invalid Sync File!");
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function clearAllData() {
+        if(confirm("Dhyan Dein! Sara data delete ho jayega. Kya aap naya month shuru karna chahte hain?")) {
+            localStorage.removeItem('rudraniData');
+            localStorage.removeItem('rudraniSalary');
+            workData = [];
+            document.getElementById('salaryPaid').value = "";
+            updateUI();
         }
-        .btn-whatsapp:hover {
-            background-color: #1da851;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #1a73e8;
-            color: white;
-            font-weight: 600;
-        }
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
+    }
+
+    function downloadExcel() {
+        if(workData.length === 0) { alert("No data to download!"); return; }
+        let csvContent = "data:text/csv;charset=utf-8,Date,Attendance,Client Name,Project Type,Project Price (INR),Lunch Allowance (INR),Total Day Income (INR)\n";
+        workData.forEach(row => { csvContent += `${row.date},${row.attendance},${row.client},${row.type},${row.price},${row.lunch},${row.total}\n`; });
+        
+        csvContent += `\n,,,,,Grand Total Earned,${document.getElementById('grandTotal').innerText}\n`;
+        csvContent += `,,,,,Salary Paid,${document.getElementById('displayPaid').innerText}\n`;
+        csvContent += `,,,,,Pending Balance,${document.getElementById('totPending').innerText}\n`;
+
+        let link = document.createElement("a");
+        link.setAttribute("href", encodeURI(csvContent));
+        link.setAttribute("download", "Rudrani_Photography_Workbook.csv");
+        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+
+    function shareWhatsApp() {
+        let waNumber = document.getElementById('waNumber').value.trim();
+        if(workData.length === 0) { alert("No data to share!"); return; }
+
+        let message = `*RUDRANI PHOTOGRAPHY - WORK REPORT*\n*Editor Name:* Biju\n----------------------------\n`;
+        message += `*Total Present:* ${document.getElementById('totPresent').innerText} Days\n`;
+        message += `*Total Earned:* ₹${document.getElementById('grandTotal').innerText}\n`;
+        message += `*Salary Paid:* ₹${document.getElementById('displayPaid').innerText}\n`;
+        message += `*Pending Balance:* ₹${document.getElementById('totPending').innerText}\n----------------------------\n*Daily Breakup:*\n`;
+
+        workData.forEach(row => {
+            message += row.attendance === "Present" ? `📅 ${row.date} | 👤 ${row.client} | 🎬 ${row.type} | 💰 ₹${row.total}\n` : `📅 ${row.date} | 🔴 OFF\n`;
+        });
+
+        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
         .status-off {
             color: red;
             font-weight: bold;
